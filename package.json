@@ -28,6 +28,7 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "autoprefixer": "^10.4.19",
+    "playwright": "^1.59.1",
     "postcss": "^8.4.38",
     "typescript": "^5.4.3"
   }
