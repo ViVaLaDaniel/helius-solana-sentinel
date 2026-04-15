@@ -8,16 +8,18 @@ let heliusInstance: Helius | null = null;
 
 function getHelius() {
   if (heliusInstance) return heliusInstance;
-  
+
   if (!HELIUS_API_KEY) {
     if (typeof window === 'undefined') {
       // Return a proxy or handled null for build-time safety
       console.warn('Helius API Key is missing. Using dummy instance for build.');
-      return new Helius('00000000-0000-0000-0000-000000000000'); 
+      return new Helius('00000000-0000-0000-0000-000000000000');
     }
-    throw new Error('Helius API Key is missing. Please set NEXT_PUBLIC_HELIUS_API_KEY in .env.local');
+    throw new Error(
+      'Helius API Key is missing. Please set NEXT_PUBLIC_HELIUS_API_KEY in .env.local'
+    );
   }
-  
+
   heliusInstance = new Helius(HELIUS_API_KEY);
   return heliusInstance;
 }
@@ -48,14 +50,14 @@ export async function getParsedTransactions(address: string) {
   try {
     const pubKey = new PublicKey(address);
     const signatures = await helius.connection.getSignaturesForAddress(pubKey, { limit: 20 });
-    
+
     if (signatures.length === 0) return [];
 
-    const txSignatures = signatures.map(s => s.signature);
+    const txSignatures = signatures.map((s) => s.signature);
     const parsedTransactions = await helius.parseTransactions({
       transactions: txSignatures,
     });
-    
+
     return parsedTransactions;
   } catch (error) {
     console.error('Error fetching parsed transactions:', error);

@@ -19,14 +19,14 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setSearched(true);
-    
+
     try {
       // Fetch both assets and transactions in parallel
       const [assetsData, txData] = await Promise.all([
         getAssetsByOwner(address),
-        getParsedTransactions(address)
+        getParsedTransactions(address),
       ]);
-      
+
       setAssets(assetsData.items || []);
       setTransactions(txData || []);
     } catch (err: any) {
@@ -51,9 +51,9 @@ export default function Home() {
               Missing API Key
             </div>
           )}
-          <a 
-            href="https://github.com/ViVaLaDaniel/helius-solana-sentinel" 
-            target="_blank" 
+          <a
+            href="https://github.com/ViVaLaDaniel/helius-solana-sentinel"
+            target="_blank"
             rel="noopener noreferrer"
             className="hover:opacity-70 transition-opacity"
           >
@@ -65,15 +65,15 @@ export default function Home() {
       <div className="w-full max-w-2xl bg-zinc-900/50 p-1 rounded-2xl border border-zinc-800 focus-within:border-orange-500 transition-colors shadow-2xl shadow-orange-500/5">
         <div className="relative flex items-center">
           <Search className="absolute left-4 w-5 h-5 text-zinc-500" />
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="Enter Solana wallet address..."
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             className="w-full bg-transparent p-5 pl-12 rounded-xl focus:outline-none text-lg placeholder:text-zinc-600"
           />
-          <button 
+          <button
             onClick={handleSearch}
             disabled={loading}
             className="bg-orange-600 hover:bg-orange-500 text-white px-8 py-3 rounded-xl mr-2 font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
@@ -90,21 +90,24 @@ export default function Home() {
             <Activity className="w-10 h-10 text-blue-500 mb-6 group-hover:scale-110 transition-transform" />
             <h3 className="text-xl font-bold mb-3">Real-time Activity</h3>
             <p className="text-zinc-500 leading-relaxed">
-              Monitor live transactions and smart contract interactions with human-readable parsing powered by Helius.
+              Monitor live transactions and smart contract interactions with human-readable parsing
+              powered by Helius.
             </p>
           </div>
           <div className="p-8 bg-zinc-900/30 border border-zinc-800 rounded-3xl hover:bg-zinc-900/50 transition-all group">
             <Coins className="w-10 h-10 text-yellow-500 mb-6 group-hover:scale-110 transition-transform" />
             <h3 className="text-xl font-bold mb-3">Portfolio Insights</h3>
             <p className="text-zinc-500 leading-relaxed">
-              Track NFTs, tokens, and compressed assets across your entire wallet using Helius DAS API.
+              Track NFTs, tokens, and compressed assets across your entire wallet using Helius DAS
+              API.
             </p>
           </div>
           <div className="p-8 bg-zinc-900/30 border border-zinc-800 rounded-3xl hover:bg-zinc-900/50 transition-all group">
             <ShieldCheck className="w-10 h-10 text-green-500 mb-6 group-hover:scale-110 transition-transform" />
             <h3 className="text-xl font-bold mb-3">Security Scanning</h3>
             <p className="text-zinc-500 leading-relaxed">
-              Detect common wallet threats including address poisoning and malicious airdrops automatically.
+              Detect common wallet threats including address poisoning and malicious airdrops
+              automatically.
             </p>
           </div>
         </div>
@@ -139,7 +142,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      
+
       <footer className="mt-auto pt-24 pb-8 text-zinc-600 text-[10px] text-center uppercase tracking-[0.2em] font-medium">
         Developed with Helius SDK • Build for Superteam Earn • © 2026
       </footer>

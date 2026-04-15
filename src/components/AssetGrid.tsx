@@ -25,11 +25,7 @@ interface AssetGridProps {
 
 export function AssetGrid({ assets }: AssetGridProps) {
   if (assets.length === 0) {
-    return (
-      <div className="text-zinc-500 text-center py-12">
-        No assets found for this address.
-      </div>
-    );
+    return <div className="text-zinc-500 text-center py-12">No assets found for this address.</div>;
   }
 
   return (
@@ -44,9 +40,9 @@ export function AssetGrid({ assets }: AssetGridProps) {
         >
           <div className="aspect-square bg-zinc-800 relative">
             {asset.content?.links?.image ? (
-              <img 
-                src={asset.content.links.image} 
-                alt={asset.content.metadata?.name || 'Asset'} 
+              <img
+                src={asset.content.links.image}
+                alt={asset.content.metadata?.name || 'Asset'}
                 className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
               />
             ) : (

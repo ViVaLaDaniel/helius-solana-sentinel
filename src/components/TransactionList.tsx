@@ -17,20 +17,20 @@ interface TransactionListProps {
 
 export function TransactionList({ transactions }: TransactionListProps) {
   if (transactions.length === 0) {
-    return (
-      <div className="text-zinc-500 text-center py-12">
-        No recent transactions found.
-      </div>
-    );
+    return <div className="text-zinc-500 text-center py-12">No recent transactions found.</div>;
   }
 
   const getIcon = (type: string) => {
     switch (type.toUpperCase()) {
-      case 'SWAP': return <ArrowRightLeft className="w-5 h-5 text-blue-500" />;
-      case 'NFT_SALE': 
-      case 'NFT_MINT': return <ShoppingCart className="w-5 h-5 text-purple-500" />;
-      case 'TRANSFER': return <CreditCard className="w-5 h-5 text-green-500" />;
-      default: return <Activity className="w-5 h-5 text-zinc-500" />;
+      case 'SWAP':
+        return <ArrowRightLeft className="w-5 h-5 text-blue-500" />;
+      case 'NFT_SALE':
+      case 'NFT_MINT':
+        return <ShoppingCart className="w-5 h-5 text-purple-500" />;
+      case 'TRANSFER':
+        return <CreditCard className="w-5 h-5 text-green-500" />;
+      default:
+        return <Activity className="w-5 h-5 text-zinc-500" />;
     }
   };
 
@@ -39,7 +39,7 @@ export function TransactionList({ transactions }: TransactionListProps) {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -53,17 +53,13 @@ export function TransactionList({ transactions }: TransactionListProps) {
           transition={{ delay: index * 0.05 }}
           className="bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex items-start gap-4 hover:border-zinc-700 transition-colors"
         >
-          <div className="p-2 bg-black/40 rounded-lg shrink-0">
-            {getIcon(tx.type)}
-          </div>
+          <div className="p-2 bg-black/40 rounded-lg shrink-0">{getIcon(tx.type)}</div>
           <div className="flex-1 min-w-0">
             <div className="flex justify-between gap-4">
               <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest leading-none">
                 {tx.type.replace(/_/g, ' ')}
               </span>
-              <span className="text-xs text-zinc-600 shrink-0">
-                {formatDate(tx.timestamp)}
-              </span>
+              <span className="text-xs text-zinc-600 shrink-0">{formatDate(tx.timestamp)}</span>
             </div>
             <p className="text-sm mt-1 leading-relaxed text-zinc-200 truncate">
               {tx.description || 'Smart Contract Interaction'}
